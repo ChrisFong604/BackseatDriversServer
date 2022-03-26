@@ -17,13 +17,22 @@ import { RequestsService } from './requests/requests.service';
 import { PrismaModule } from './prismadatabase/prisma.module';
 import { UserModule } from './user/user.module';
 import { SchoolModule } from './school/school.module';
+import { UserController } from './user/user.controller';
 @Module({
-  imports: [PrismaModule, RidesModule, RequestsModule, DriversModule, UserModule, SchoolModule],
+  imports: [
+    PrismaModule,
+    RidesModule,
+    RequestsModule,
+    DriversModule,
+    UserModule,
+    SchoolModule,
+  ],
   controllers: [
     AppController,
     RidesController,
     DriversController,
     RequestsController,
+    UserController,
   ],
   providers: [AppService, RidesService, RequestsService],
 })

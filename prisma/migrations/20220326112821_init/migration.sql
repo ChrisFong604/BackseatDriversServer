@@ -10,11 +10,11 @@ CREATE TABLE "School" (
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
-    "school_id" INTEGER NOT NULL,
+    "school_id" INTEGER,
     "first_name" VARCHAR(50) NOT NULL,
     "last_name" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL,
-    "address" VARCHAR(255) NOT NULL,
+    "address" VARCHAR(255),
     "phone_number" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -65,7 +65,7 @@ CREATE UNIQUE INDEX "Driver_user_id_key" ON "Driver"("user_id");
 CREATE UNIQUE INDEX "Request_requester_id_key" ON "Request"("requester_id");
 
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_school_id_fkey" FOREIGN KEY ("school_id") REFERENCES "School"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_school_id_fkey" FOREIGN KEY ("school_id") REFERENCES "School"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Driver" ADD CONSTRAINT "Driver_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

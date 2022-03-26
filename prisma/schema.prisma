@@ -32,12 +32,12 @@ model School {
 
 model User {
   id           Int     @id @default(autoincrement())
-  school       School  @relation(fields: [school_id], references: [id])
-  school_id    Int // relation scalar field  (used in the `@relation` attribute above)
+  school       School? @relation(fields: [school_id], references: [id])
+  school_id    Int? // relation scalar field  (used in the `@relation` attribute above)
   first_name   String  @db.VarChar(50)
   last_name    String  @db.VarChar(50)
   email        String  @unique
-  address      String  @db.VarChar(255)
+  address      String? @db.VarChar(255)
   phone_number String? @unique
 
   Request Request[]
