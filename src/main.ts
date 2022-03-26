@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('BackseatDriverAPI')
-    .setDescription('All API endpoints')
+    .setDescription('All API endpoints for Backseat Drivers')
     .setVersion('1.0')
     .addTag('Rides')
     .build();

@@ -22,7 +22,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Driver" (
-    "driver_id" TEXT NOT NULL,
+    "driver_id" SERIAL NOT NULL,
     "user_id" INTEGER NOT NULL,
 
     CONSTRAINT "Driver_pkey" PRIMARY KEY ("driver_id")
@@ -33,7 +33,7 @@ CREATE TABLE "Request" (
     "id" SERIAL NOT NULL,
     "requester_id" INTEGER NOT NULL,
     "requester_location" TEXT NOT NULL,
-    "requested_ride_id" TEXT NOT NULL,
+    "requested_ride_id" INTEGER NOT NULL,
     "status" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Request_pkey" PRIMARY KEY ("id")
@@ -41,9 +41,9 @@ CREATE TABLE "Request" (
 
 -- CreateTable
 CREATE TABLE "Ride" (
-    "ride_id" TEXT NOT NULL,
+    "ride_id" SERIAL NOT NULL,
     "passenger_id" INTEGER NOT NULL,
-    "driver_id" TEXT NOT NULL,
+    "driver_id" INTEGER NOT NULL,
     "date_of_ride" TEXT NOT NULL,
     "number_of_seats" INTEGER NOT NULL,
     "departure" TEXT NOT NULL,
@@ -59,16 +59,7 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_phone_number_key" ON "User"("phone_number");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Driver_driver_id_key" ON "Driver"("driver_id");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Request_requester_id_key" ON "Request"("requester_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Request_requested_ride_id_key" ON "Request"("requested_ride_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Ride_ride_id_key" ON "Ride"("ride_id");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_school_id_fkey" FOREIGN KEY ("school_id") REFERENCES "School"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

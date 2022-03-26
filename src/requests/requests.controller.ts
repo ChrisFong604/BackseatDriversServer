@@ -7,11 +7,10 @@ import { RequestsService } from './requests.service';
 export class RequestsController {
   constructor(private requestService: RequestsService) {}
 
-  @HttpCode(201)
-  @Post('/request')
-  async sendRequest(
-    @Body() CreateRequestDto: CreateRequestDto,
-  ): Promise<RequestModel> {
-    return this.requestService.sendRequest(CreateRequestDto);
-  }
+  //   @HttpCode(201)
+  //   @Post('/request')
+  //   async sendRequest(
+  //     @Body() CreateRequestDto: CreateRequestDto,
+  //   ): Promise<RequestModel> {
+  //     return this.requestService.sendRequest(CreateRequestDto);
 }

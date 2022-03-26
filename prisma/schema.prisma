@@ -32,8 +32,8 @@ model User {
 }
 
 model Driver {
-  driver_id String @id @unique
-  User      User   @relation(fields: [user_id], references: [id])
+  driver_id Int  @id @default(autoincrement())
+  User      User @relation(fields: [user_id], references: [id])
   user_id   Int
 
   Ride Ride[]
@@ -46,19 +46,19 @@ model Request {
   requester_id       Int    @unique
   requester_location String
 
-  requested_ride    Ride   @relation(fields: [requested_ride_id], references: [ride_id])
-  requested_ride_id String @unique
+  requested_ride    Ride @relation(fields: [requested_ride_id], references: [ride_id])
+  requested_ride_id Int
 
   status Boolean @default(false)
 }
 
 model Ride {
-  ride_id            String    @id @unique
+  ride_id            Int       @id @default(autoincrement())
   passenger_requests Request[]
   passenger_id       Int
 
   Driver    Driver @relation(fields: [driver_id], references: [driver_id])
-  driver_id String
+  driver_id Int
 
   date_of_ride    String
   number_of_seats Int
