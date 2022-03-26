@@ -1,7 +1,6 @@
-import { School } from '../../school/entities/school.entity';
+import { School } from 'src/school/entities/school.entity';
 import { Request } from 'src/requests/entity/request.entity';
 import { Driver } from 'src/drivers/entity/driver.entity';
-
 export class User {
   id: number;
   school?: School;
@@ -12,5 +11,5 @@ export class User {
   address: string;
   phone_number: string | null;
   Request?: Request[];
-  Driver?: Driver[];
+  Driver?: Driver | null;
 }

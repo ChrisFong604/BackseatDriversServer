@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpCode, Post, Query } from '@nestjs/common';
 import { Ride } from '@prisma/client';
+import { CreateRideDto } from './dto/create-ride.dto';
 import { RidesService } from './rides.service';
 @Controller('api/rides')
 export class RidesController {
@@ -7,7 +8,7 @@ export class RidesController {
 
   @HttpCode(200)
   @Get('all')
-  async getAllRides(@Query() query: ListAllRides) {
+  async getAllRides() {
     return this.ridesService.getAllRides;
   }
 

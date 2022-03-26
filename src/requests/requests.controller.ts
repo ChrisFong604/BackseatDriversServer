@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { CreateRequestDto } from './DTO/requestDTO';
+import { CreateRequestDto } from './dto/create-request.dto';
 import { Request as RequestModel } from '@prisma/client';
 import { RequestsService } from './requests.service';
 

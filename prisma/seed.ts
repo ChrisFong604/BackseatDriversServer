@@ -2,9 +2,10 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { PrismaService } from './prisma.service';
 const prisma = new PrismaClient();
 
-/* async function main() {
+async function main() {
   const Ride1 = await prisma.ride.create({
     data: {
+      Driver: null,
       passenger_id: 0,
       date_of_ride: '2021-01-05',
       number_of_seats: 4,
@@ -12,7 +13,7 @@ const prisma = new PrismaClient();
       school_location: 'Cambridge',
     },
   });
-} */
+}
 /*   const Ride1 = await prisma.ride.createMany({
     data: [{
       passenger_id: 0,
@@ -42,11 +43,11 @@ const prisma = new PrismaClient();
     },
     ]
 } )*/
-/* main()
+main()
   .catch((e) => {
     console.error(e);
     process.exit(1);
   })
   .finally(async () => {
     await prisma.$disconnect();
-  }); */
+  });

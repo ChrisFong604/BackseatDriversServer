@@ -59,6 +59,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_phone_number_key" ON "User"("phone_number");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Driver_user_id_key" ON "Driver"("user_id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Request_requester_id_key" ON "Request"("requester_id");
 
 -- AddForeignKey
