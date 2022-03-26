@@ -15,8 +15,10 @@ import { DriversModule } from './drivers/drivers.module';
 import { RidesService } from './rides/rides.service';
 import { RequestsService } from './requests/requests.service';
 import { PrismaModule } from './prismadatabase/prisma.module';
+import { UserModule } from './user/user.module';
+import { SchoolModule } from './school/school.module';
 @Module({
-  imports: [PrismaModule, RidesModule, RequestsModule, DriversModule],
+  imports: [PrismaModule, RidesModule, RequestsModule, DriversModule, UserModule, SchoolModule],
   controllers: [
     AppController,
     RidesController,

@@ -1,6 +1,5 @@
 import { Body, Controller, Get, HttpCode, Post, Query } from '@nestjs/common';
 import { Ride } from '@prisma/client';
-import { CreateRideDto, ListAllRides } from './DTO/RideDTO';
 import { RidesService } from './rides.service';
 @Controller('api/rides')
 export class RidesController {
