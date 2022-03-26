@@ -9,3 +9,19 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Riders {
+  school    String?
+  firstName String?
+  lastName  String?
+  riderID   Int      @id @default(autoincrement())
+  email     String   @unique
+  address   String?
+  
+
+  
+  
+  name      String?
+  role      Role     @default(USER)
+  posts     Post[]
+}
