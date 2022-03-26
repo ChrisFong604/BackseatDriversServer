@@ -1,4 +1,4 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('drivers')
+@Controller('api/drivers')
 export class DriversController {}
