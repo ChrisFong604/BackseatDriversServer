@@ -6,14 +6,6 @@ import { PrismaService } from 'prisma/prisma.service';
 export class DriversService {
   constructor(private prisma: PrismaService) {}
 
-  async getUniqueDriver(
-    driverWhereUniqueInput: Prisma.DriverWhereUniqueInput,
-  ): Promise<Driver | null> {
-    return this.prisma.driver.findUnique({
-      where: driverWhereUniqueInput,
-    });
-  }
-
   async getAllDrivers(params: {
     skip?: number;
     take?: number;
@@ -28,6 +20,14 @@ export class DriversService {
       cursor,
       where,
       orderBy,
+    });
+  }
+
+  async getUniqueDriver(
+    driverWhereUniqueInput: Prisma.DriverWhereUniqueInput,
+  ): Promise<Driver | null> {
+    return this.prisma.driver.findUnique({
+      where: driverWhereUniqueInput,
     });
   }
 }

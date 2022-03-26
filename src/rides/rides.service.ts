@@ -6,14 +6,6 @@ import { Prisma, Ride } from '@prisma/client';
 export class RidesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findUniqueRide(
-    rideWhereUniqueInput: Prisma.RideWhereUniqueInput,
-  ): Promise<Ride | null> {
-    return this.prisma.ride.findUnique({
-      where: rideWhereUniqueInput,
-    });
-  }
-
   async getAllRides(params: {
     skip?: number;
     take?: number;
@@ -22,5 +14,19 @@ export class RidesService {
     orderBy?: Prisma.RideOrderByWithRelationInput;
   }): Promise<Ride[]> {
     return this.prisma.ride.findMany();
+  }
+
+  async findUniqueRide(
+    rideWhereUniqueInput: Prisma.RideWhereUniqueInput,
+  ): Promise<Ride | null> {
+    return this.prisma.ride.findUnique({
+      where: rideWhereUniqueInput,
+    });
+  }
+
+  async createRide(data: Prisma.RideCreateInput): Promise<Ride> {
+    return this.prisma.ride.create({
+      data,
+    });
   }
 }
