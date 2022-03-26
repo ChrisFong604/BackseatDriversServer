@@ -11,17 +11,28 @@ datasource db {
 }
 
 model School {
-  id     Int     @id @default(autoincrement())
-  riders Rider[]
+  id    Int    @id @default(autoincrement())
+  users User[]
 }
 
-model Rider {
-  id         Int    @id @default(autoincrement())
-  school     School @relation(fields: [school_id], references: [id])
-  school_id  Int // relation scalar field  (used in the `@relation` attribute above)
-  first_name String @db.VarChar(50)
-  lastName   String @db.VarChar(50)
-  email      String @unique
-  address    String @db.VarChar(255)
-  phoneNum   String @unique
+model User {
+  id              Int    @id @default(autoincrement())
+  school          School @relation(fields: [school_id], references: [id])
+  school_id       Int // relation scalar field  (used in the `@relation` attribute above)
+  first_name      String @db.VarChar(50)
+  lastName        String @db.VarChar(50)
+  email           String @unique
+  address         String @db.VarChar(255)
+  phoneNum        String @unique
+  driver_rides    Ride[]
+  passenger_rides Ride[]
+}
+
+model Ride {
+  id            Int    @id @default(autoincrement())
+  driver        User   @relation(fields: [driver_id], references: [id])
+  driver_id     Int // relation scalar field  (used in the `@relation` attribute above)
+  passengers    User[] @relation(fields: [passengers_id], references: [id])
+  passengers_id Int // relation scalar field  (used in the `@relation` attribute above)
+
 }
