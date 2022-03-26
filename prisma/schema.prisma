@@ -60,8 +60,8 @@ model Ride {
   Driver    Driver @relation(fields: [driver_id], references: [driver_id])
   driver_id Int
 
-  date_of_ride    String
-  number_of_seats Int
-  departure       String
-  school_location String
+  date_of_ride       String
+  number_of_seats    Int
+  departure_location String
+  school_location    String
 }

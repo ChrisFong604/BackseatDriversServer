@@ -46,7 +46,7 @@ CREATE TABLE "Ride" (
     "driver_id" INTEGER NOT NULL,
     "date_of_ride" TEXT NOT NULL,
     "number_of_seats" INTEGER NOT NULL,
-    "departure" TEXT NOT NULL,
+    "departure_location" TEXT NOT NULL,
     "school_location" TEXT NOT NULL,
 
     CONSTRAINT "Ride_pkey" PRIMARY KEY ("ride_id")
