@@ -11,28 +11,57 @@ datasource db {
 }
 
 model School {
-  id    Int    @id @default(autoincrement())
-  users User[]
+  id              Int    @id @default(autoincrement())
+  school_name     String
+  school_location String
+  users           User[]
 }
 
 model User {
-  id              Int    @id @default(autoincrement())
-  school          School @relation(fields: [school_id], references: [id])
-  school_id       Int // relation scalar field  (used in the `@relation` attribute above)
-  first_name      String @db.VarChar(50)
-  lastName        String @db.VarChar(50)
-  email           String @unique
-  address         String @db.VarChar(255)
-  phoneNum        String @unique
-  driver_rides    Ride[]
-  passenger_rides Ride[]
+  id           Int     @id @default(autoincrement())
+  school       School  @relation(fields: [school_id], references: [id])
+  school_id    Int // relation scalar field  (used in the `@relation` attribute above)
+  first_name   String  @db.VarChar(50)
+  last_name    String  @db.VarChar(50)
+  email        String  @unique
+  address      String  @db.VarChar(255)
+  phone_number String? @unique
+
+  Request Request[]
+  Driver  Driver[]
+}
+
+model Driver {
+  driver_id String @id @unique
+  User      User   @relation(fields: [user_id], references: [id])
+  user_id   Int
+
+  Ride Ride[]
+}
+
+model Request {
+  id Int @id @default(autoincrement())
+
+  requester          User   @relation(fields: [requester_id], references: [id])
+  requester_id       Int    @unique
+  requester_location String
+
+  requested_ride    Ride   @relation(fields: [requested_ride_id], references: [ride_id])
+  requested_ride_id String @unique
+
+  status Boolean @default(false)
 }
 
 model Ride {
-  id            Int    @id @default(autoincrement())
-  driver        User   @relation(fields: [driver_id], references: [id])
-  driver_id     Int // relation scalar field  (used in the `@relation` attribute above)
-  passengers    User[] @relation(fields: [passengers_id], references: [id])
-  passengers_id Int // relation scalar field  (used in the `@relation` attribute above)
+  ride_id            String    @id @unique
+  passenger_requests Request[]
+  passenger_id       Int
 
+  Driver    Driver @relation(fields: [driver_id], references: [driver_id])
+  driver_id String
+
+  date_of_ride    String
+  number_of_seats Int
+  departure       String
+  school_location String
 }
