@@ -9,12 +9,12 @@ export class RidesController {
   @HttpCode(200)
   @Get('all')
   async getAllRides() {
-    return this.ridesService.getAllRides;
+    return this.ridesService.getAllRides({});
   }
 
-  @HttpCode(201)
+  /* @HttpCode(201)
   @Post('createride')
   async createRide(@Body() createRideDto: CreateRideDto): Promise<Ride> {
     return this.ridesService.createRide(createRideDto);
-  }
+  } */
 }

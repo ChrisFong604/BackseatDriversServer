@@ -3,7 +3,6 @@ import { Driver } from 'src/drivers/entity/driver.entity';
 export class Ride {
   ride_id: number;
   passenger_requests?: Request[];
-  passenger_id: number;
   Driver?: Driver;
   driver_id: number;
   date_of_ride: string;

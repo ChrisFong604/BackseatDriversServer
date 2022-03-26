@@ -1,6 +1,5 @@
 import { User } from 'src/user/entities/user.entity';
 import { Ride } from 'src/rides/entity/ride.entity';
-
 export class Request {
   id: number;
   requester?: User;

@@ -1,5 +1,6 @@
 
   export class ConnectDriverDto {
-    driver_id: number;
+    driver_id?: number;
+user_id?: number;
   }
   

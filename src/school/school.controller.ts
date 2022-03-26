@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  HttpCode,
 } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
@@ -20,9 +21,10 @@ export class SchoolController {
     return this.schoolService.create(createSchoolDto);
   }
 
-  @Get()
+  @HttpCode(200)
+  @Get('/all')
   findAll() {
-    return this.schoolService.findAll();
+    return this.schoolService.getAllSchools({});
   }
 
   @Get(':id')
