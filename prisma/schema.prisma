@@ -10,18 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Riders {
-  school    String?
-  firstName String?
-  lastName  String?
-  riderID   Int      @id @default(autoincrement())
-  email     String   @unique
-  address   String?
-  
+model School {
+  id     Int     @id @default(autoincrement())
+  riders Rider[]
+}
 
-  
-  
-  name      String?
-  role      Role     @default(USER)
-  posts     Post[]
+model Rider {
+  id         Int    @id @default(autoincrement())
+  school     School @relation(fields: [school_id], references: [id])
+  school_id  Int // relation scalar field  (used in the `@relation` attribute above)
+  first_name String @db.VarChar(50)
+  lastName   String @db.VarChar(50)
+  email      String @unique
+  address    String @db.VarChar(255)
+  phoneNum   String @unique
 }
