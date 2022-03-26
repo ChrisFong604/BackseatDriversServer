@@ -1,16 +1,15 @@
 -- CreateTable
 CREATE TABLE "School" (
-    "id" SERIAL NOT NULL,
     "school_name" TEXT NOT NULL,
     "school_location" TEXT NOT NULL,
 
-    CONSTRAINT "School_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "School_pkey" PRIMARY KEY ("school_name")
 );
 
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
-    "school_id" INTEGER,
+    "school_name" TEXT NOT NULL,
     "first_name" VARCHAR(50) NOT NULL,
     "last_name" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL,
@@ -42,7 +41,6 @@ CREATE TABLE "Request" (
 -- CreateTable
 CREATE TABLE "Ride" (
     "ride_id" SERIAL NOT NULL,
-    "passenger_id" INTEGER NOT NULL,
     "driver_id" INTEGER NOT NULL,
     "date_of_ride" TEXT NOT NULL,
     "number_of_seats" INTEGER NOT NULL,
@@ -51,6 +49,9 @@ CREATE TABLE "Ride" (
 
     CONSTRAINT "Ride_pkey" PRIMARY KEY ("ride_id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "School_school_name_key" ON "School"("school_name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
@@ -65,7 +66,7 @@ CREATE UNIQUE INDEX "Driver_user_id_key" ON "Driver"("user_id");
 CREATE UNIQUE INDEX "Request_requester_id_key" ON "Request"("requester_id");
 
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_school_id_fkey" FOREIGN KEY ("school_id") REFERENCES "School"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_school_name_fkey" FOREIGN KEY ("school_name") REFERENCES "School"("school_name") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Driver" ADD CONSTRAINT "Driver_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
