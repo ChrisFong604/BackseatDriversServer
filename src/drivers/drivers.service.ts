@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Driver, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
+import { identity } from 'rxjs';
 import { RidesService } from 'src/rides/rides.service';
 
 @Injectable()
@@ -35,15 +36,21 @@ export class DriversService {
     });
   }
 
-  async createDriver(data: Prisma.DriverCreateInput): Promise<Driver> {
+  async createDriver(id: number) {
     return await this.prisma.driver.create({
-      data,
+      data: {
+        User: {
+          connect: {
+            id: id,
+          },
+        },
+      },
     });
   }
 
   async createRideFromDriver(
-    data: Prisma.RideCreateInput,
     driver_id: number,
+    data: Prisma.RideCreateInput,
   ): Promise<void> {
     this.ridesService.createRide(data, driver_id);
     return;

@@ -2,6 +2,7 @@ import { Controller, Get, HttpCode, Param, Post, Query } from '@nestjs/common';
 import { DriversService } from './drivers.service';
 import { Driver } from '@prisma/client';
 import { CreateDriverDto } from './dto/create-driver.dto';
+import { CreateRideDto } from 'src/rides/dto/create-ride.dto';
 
 @Controller('api/drivers')
 export class DriversController {
@@ -22,8 +23,13 @@ export class DriversController {
   }
 
   @HttpCode(201)
-  @Post(':/id')
-  createDriver(@Param(':id') id: number, createDriverDto: CreateDriverDto) {
-    return this.driversService;
+  @Post(':id')
+  createDriver(@Param() id: number) {
+    return this.driversService.createDriver(id);
+  }
+
+  @Post(':id')
+  createRideFromDriver(@Param() id: number, createRideDto: CreateRideDto) {
+    return this.driversService.createRideFromDriver(id, createRideDto);
   }
 }
