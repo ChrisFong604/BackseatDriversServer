@@ -4,8 +4,6 @@ import { PrismaService } from './prisma.service';
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.$executeRaw`DELETE FROM public."School" CASCADE;`;
-
   const SFU = await prisma.school.create({
     data: {
       school_name: 'Simon Fraser University',
@@ -71,40 +69,40 @@ async function main() {
     },
   });
 
-  const TyroneRide = await prisma.ride.create({
-    data: {
-      driver_id: 0,
-      date_of_ride: '2021-01-05',
-      number_of_seats: 4,
-      departure_location: 'Birmingham, London',
-      school_location: 'Cambridge',
-    },
-  });
+  // const TyroneRide = await prisma.ride.create({
+  //   data: {
+  //     driver_id: 0,
+  //     date_of_ride: '2021-01-05',
+  //     number_of_seats: 4,
+  //     departure_location: 'Birmingham, London',
+  //     school_location: 'Cambridge',
+  //   },
+  // });
 
-  const QuintonRequest = await prisma.request.create({
-    data: {
-      requester: {
-        connect: { id: 2 },
-      },
-      requester_location: 'Birmingham',
-      requested_ride: {
-        connect: { ride_id: 1 },
-      },
-      status: false,
-    },
-  });
-  const DrakeRequest = await prisma.request.create({
-    data: {
-      requester: {
-        connect: { id: 3 },
-      },
-      requester_location: 'Birmingham',
-      requested_ride: {
-        connect: { ride_id: 1 },
-      },
-      status: false,
-    },
-  });
+  // const QuintonRequest = await prisma.request.create({
+  //   data: {
+  //     requester: {
+  //       connect: { id: 2 },
+  //     },
+  //     requester_location: 'Birmingham',
+  //     requested_ride: {
+  //       connect: { ride_id: 1 },
+  //     },
+  //     status: false,
+  //   },
+  // });
+  // const DrakeRequest = await prisma.request.create({
+  //   data: {
+  //     requester: {
+  //       connect: { id: 3 },
+  //     },
+  //     requester_location: 'Birmingham',
+  //     requested_ride: {
+  //       connect: { ride_id: 1 },
+  //     },
+  //     status: false,
+  //   },
+  // });
 }
 /*   const Ride1 = await prisma.ride.createMany({
     data: [{
