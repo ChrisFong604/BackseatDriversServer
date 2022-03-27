@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { Request, Ride } from '@prisma/client';
 import { RequestsService } from 'src/requests/requests.service';
+import { CreateRideDto } from './dto/create-ride.dto';
 import { RidesService } from './rides.service';
 @Controller('api/rides')
 export class RidesController {
@@ -24,6 +25,11 @@ export class RidesController {
   @Get('all')
   getAllRides() {
     return this.ridesService.getAllRides({});
+  }
+
+  @Post('create')
+  async createRide(@Body() createRideDto: CreateRideDto) {
+    return await this.ridesService.createRide(createRideDto);
   }
 
   @HttpCode(200)

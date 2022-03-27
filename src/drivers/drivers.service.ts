@@ -61,7 +61,7 @@ export class DriversService {
     driver_id: number,
     data: Prisma.RideCreateInput,
   ): Promise<void> {
-    this.ridesService.createRide(driver_id, data);
+    this.ridesService.createRide(data);
     return;
   }
 
