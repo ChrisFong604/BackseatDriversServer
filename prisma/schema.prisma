@@ -62,7 +62,7 @@ model Request {
   requested_ride    Ride @relation(fields: [requested_ride_id], references: [ride_id])
   requested_ride_id Int
 
-  status Boolean @default(false)
+  status Boolean @default(false) //true when accepted, else false
 }
 
 model Ride {
@@ -72,6 +72,7 @@ model Ride {
   Driver    Driver @relation(fields: [driver_id], references: [driver_id])
   driver_id Int
 
+  isFull             Boolean @default(false)
   date_of_ride       String
   number_of_seats    Int
   departure_location String

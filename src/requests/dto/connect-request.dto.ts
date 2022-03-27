@@ -1,6 +1,4 @@
-
-  export class ConnectRequestDto {
-    id?: number;
-requester_id?: number;
-  }
-  
+export class ConnectRequestDto {
+  id?: number;
+  requester_id?: number;
+}
