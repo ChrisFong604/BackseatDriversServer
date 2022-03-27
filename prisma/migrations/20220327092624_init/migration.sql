@@ -41,7 +41,11 @@ CREATE TABLE "Request" (
 -- CreateTable
 CREATE TABLE "Ride" (
     "ride_id" SERIAL NOT NULL,
-    "driver_id" INTEGER NOT NULL,
+    "driver_id" INTEGER,
+    "host_name" TEXT,
+    "phone_number" TEXT,
+    "email" TEXT,
+    "description" TEXT,
     "is_full" BOOLEAN,
     "date_of_ride" TEXT NOT NULL,
     "number_of_seats" INTEGER NOT NULL,
@@ -79,4 +83,4 @@ ALTER TABLE "Request" ADD CONSTRAINT "Request_requester_id_fkey" FOREIGN KEY ("r
 ALTER TABLE "Request" ADD CONSTRAINT "Request_requested_ride_id_fkey" FOREIGN KEY ("requested_ride_id") REFERENCES "Ride"("ride_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Ride" ADD CONSTRAINT "Ride_driver_id_fkey" FOREIGN KEY ("driver_id") REFERENCES "Driver"("driver_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Ride" ADD CONSTRAINT "Ride_driver_id_fkey" FOREIGN KEY ("driver_id") REFERENCES "Driver"("driver_id") ON DELETE SET NULL ON UPDATE CASCADE;

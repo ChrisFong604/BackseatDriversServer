@@ -87,165 +87,172 @@ async function main() {
     },
   });
 
-  const TyroneTheDriver = await prisma.driver.create({
-    data: {
-      driver: {
-        connect: {
-          id: 1,
-        },
-      },
-    },
-  });
-
-  const TyronesRide = await prisma.ride.create({
-    data: {
-      driver: {
-        connect: {
-          driver_id: 1,
-        },
-      },
-      date_of_ride: 'Today',
-      number_of_seats: 3,
-      departure_location: 'Las Vegas',
-      school_location: 'somewhere',
-    },
-  });
-
-  const QuintonTheDriver = await prisma.driver.create({
-    data: {
-      driver: {
-        connect: {
-          id: 2,
-        },
-      },
-    },
-  });
-
-  const QuintonsRide = await prisma.ride.create({
-    data: {
-      driver: {
-        connect: {
-          driver_id: 2,
-        },
-      },
-      date_of_ride: 'Tomorrow',
-      number_of_seats: 12,
-      departure_location: 'South America',
-      school_location: 'i forgot',
-    },
-  });
-
-  const DrakeRequestTyrone = await prisma.request.create({
-    data: {
-      requester: {
-        connect: {
-          id: 3,
-        },
-      },
-      requested_ride: {
-        connect: {
-          ride_id: 1,
-        },
-      },
-      requester_location: 'too far man',
-    },
-  });
-
-  const DrakeRequestQuinton = await prisma.request.create({
-    data: {
-      requester: {
-        connect: {
-          id: 3,
-        },
-      },
-      requested_ride: {
-        connect: {
-          ride_id: 2,
-        },
-      },
-      requester_location: 'too far man',
-    },
-  });
-  const QuayvonRequestQuinton = await prisma.request.create({
-    data: {
-      requester: {
-        connect: {
-          id: 4,
-        },
-      },
-      requested_ride: {
-        connect: {
-          ride_id: 2,
-        },
-      },
-      requester_location: 'uhhh',
-    },
-  });
-
-  // const TyroneRide = await prisma.ride.create({
+  // const TyroneTheDriver = await prisma.driver.create({
   //   data: {
-  //     driver_id: 0,
-  //     date_of_ride: '2021-01-05',
-  //     number_of_seats: 4,
-  //     departure_location: 'Birmingham, London',
-  //     school_location: 'Cambridge',
+  //     driver: {
+  //       connect: {
+  //         id: 1,
+  //       },
+  //     },
   //   },
   // });
 
-  // const QuintonRequest = await prisma.request.create({
+  // const TyronesRide = await prisma.ride.create({
+  //   data: {
+  //     driver: {
+  //       connect: {
+  //         driver_id: 1,
+  //       },
+  //     },
+  //     date_of_ride: 'Today',
+  //     number_of_seats: 3,
+  //     departure_location: 'Las Vegas',
+  //     school_location: 'somewhere',
+  //   },
+  // });
+
+  // const QuintonTheDriver = await prisma.driver.create({
+  //   data: {
+  //     driver: {
+  //       connect: {
+  //         id: 2,
+  //       },
+  //     },
+  //   },
+  // });
+
+  // const QuintonsRide = await prisma.ride.create({
+  //   data: {
+  //     driver: {
+  //       connect: {
+  //         driver_id: 2,
+  //       },
+  //     },
+  //     date_of_ride: 'Tomorrow',
+  //     number_of_seats: 12,
+  //     departure_location: 'South America',
+  //     school_location: 'i forgot',
+  //   },
+  // });
+
+  // const DrakeRequestTyrone = await prisma.request.create({
   //   data: {
   //     requester: {
-  //       connect: { id: 2 },
+  //       connect: {
+  //         id: 3,
+  //       },
   //     },
-  //     requester_location: 'Birmingham',
   //     requested_ride: {
-  //       connect: { ride_id: 1 },
+  //       connect: {
+  //         ride_id: 1,
+  //       },
   //     },
-  //     status: false,
+  //     requester_location: 'too far man',
   //   },
   // });
-  // const DrakeRequest = await prisma.request.create({
+
+  // const DrakeRequestQuinton = await prisma.request.create({
   //   data: {
   //     requester: {
-  //       connect: { id: 3 },
+  //       connect: {
+  //         id: 3,
+  //       },
   //     },
-  //     requester_location: 'Birmingham',
   //     requested_ride: {
-  //       connect: { ride_id: 1 },
+  //       connect: {
+  //         ride_id: 2,
+  //       },
   //     },
-  //     status: false,
+  //     requester_location: 'too far man',
   //   },
   // });
+  // const QuayvonRequestQuinton = await prisma.request.create({
+  //   data: {
+  //     requester: {
+  //       connect: {
+  //         id: 4,
+  //       },
+  //     },
+  //     requested_ride: {
+  //       connect: {
+  //         ride_id: 2,
+  //       },
+  //     },
+  //     requester_location: 'uhhh',
+  //   },
+  // });
+
+  const bunchORides = await prisma.ride.createMany({
+    data: [
+      {
+        host_name: 'Krazz Peyton',
+        phone_number: '604-146-2986',
+        email: 'krabbypatty@gmail.com',
+        description:
+          'Heading up the mountain every M,Tues,Fri at 8:30 a.m every morning',
+        date_of_ride: '2022-05-10',
+        number_of_seats: 7,
+        departure_location: 'Metrotown',
+        school_location: 'Simon Fraser University',
+      },
+      {
+        host_name: 'Andrew Orlowski',
+        phone_number: '778-125-9882',
+        email: 'Andrew@gmail.com',
+        description:
+          'Heading up the mountain every M,Tues,Fri at 8:30 a.m every morning',
+        date_of_ride: '2022-07-26',
+        number_of_seats: 7,
+        departure_location: 'Richmond, BC',
+        school_location: 'University of Canada West',
+      },
+      {
+        host_name: 'Kellyanne Qi',
+        phone_number: '778-635-5612',
+        email: 'KellyQi192@gmail.com',
+        description:
+          'Heading to campus tomorrow in the afternoon, send me a SMS or email if you want to carpool!',
+        date_of_ride: '2022-11-02',
+        number_of_seats: 7,
+        departure_location: 'Surrey',
+        school_location: 'University of British Columbia',
+      },
+      {
+        host_name: 'Carmen Bridges',
+        phone_number: '604-235-7422',
+        email: 'CarmenBridges192@gmail.com',
+        description:
+          'Have 1 spot available for anyone who wants to head up the mountain at 2:00p.m on Tuesdays and Thursdays, just shoot me a message',
+        date_of_ride: '2022-09-21',
+        number_of_seats: 7,
+        departure_location: 'West Vancouver',
+        school_location: 'Simon Fraser University',
+      },
+      {
+        host_name: 'Kleo Stew',
+        phone_number: '778-1215-3321',
+        email: 'KStew@gmail.com',
+        description:
+          'Have 1 spot available for anyone who wants to head up the mountain at 2:00p.m on Tuesdays and Thursdays, just shoot me a message',
+        date_of_ride: '2022-07-11',
+        number_of_seats: 7,
+        departure_location: 'West Vancouver',
+        school_location: 'Simon Fraser University',
+      },
+      {
+        host_name: 'Leonardo Bridges',
+        phone_number: '604-235-7422',
+        email: 'LeoBridges2164@gmail.com',
+        description:
+          'Have 1 spot available for anyone who wants to head up the mountain at 2:00p.m on Tuesdays and Thursdays, just shoot me a message',
+        date_of_ride: '2022-09-25',
+        number_of_seats: 7,
+        departure_location: 'West Vancouver',
+        school_location: 'Simon Fraser University',
+      },
+    ],
+  });
 }
-/*   const Ride1 = await prisma.ride.createMany({
-    data: [{
-      passenger_id: 0,
-      Driver: null,
-      date_of_ride: '2021-01-05',
-      number_of_seats: 4,
-      departure_location: 'Birmingham, London',
-      school_location: 'Cambridge',
-    },
-    {
-
-      passenger_id: 1,
-      Driver: null,
-      date_of_ride: '2021-01-12',
-      number_of_seats: 4,
-      departure_location: 'Africa',
-      school_location: 'Jamaica',
-    },
-
-     {
-      passenger_id: 2,
-      Driver: null,
-      date_of_ride: '2021-01-03',
-      number_of_seats: 4,
-      departure_location: 'Thailand',
-      school_location: 'Cambodia',
-    },
-    ]
-} )*/
 main()
   .catch((e) => {
     console.error(e);

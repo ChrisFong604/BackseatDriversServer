@@ -78,9 +78,13 @@ model Ride {
   ride_id            Int       @id @default(autoincrement())
   passenger_requests Request[]
 
-  driver    Driver @relation(fields: [driver_id], references: [driver_id])
-  driver_id Int
+  driver    Driver? @relation(fields: [driver_id], references: [driver_id])
+  driver_id Int?
 
+  host_name          String?
+  phone_number       String?
+  email              String?
+  description        String?
   is_full            Boolean?
   date_of_ride       String
   number_of_seats    Int
