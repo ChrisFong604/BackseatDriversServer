@@ -30,7 +30,7 @@ export class RidesService {
   ): Promise<Ride> {
     return await this.prisma.ride.create({
       data: {
-        Driver: {
+        driver: {
           connect: {
             driver_id: driver_id,
           },

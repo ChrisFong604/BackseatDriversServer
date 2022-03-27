@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 
 export class CreateRideDto {
-  Driver: Prisma.DriverCreateNestedOneWithoutRideInput;
+  driver: Prisma.DriverCreateNestedOneWithoutRideInput;
   date_of_ride: string;
   number_of_seats: number;
   departure_location: string;

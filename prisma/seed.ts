@@ -4,26 +4,40 @@ import { PrismaService } from './prisma.service';
 const prisma = new PrismaClient();
 
 async function main() {
-  const SFU = await prisma.school.create({
-    data: {
-      school_name: 'Simon Fraser University',
-      school_location: 'Burnaby mountain',
-    },
-  });
-  const KPU = await prisma.school.create({
-    data: {
-      school_name: 'Kwantlen Polytechnic University',
-      school_location: '8771 Lansdowne Rd, Richmond, BC V6X 3X7',
-    },
-  });
-  const UBC = await prisma.school.create({
-    data: {
-      school_name: 'University of British Colombia',
-      school_location: 'Vancouver, BC V6T 1Z4',
-    },
+  await prisma.school.createMany({
+    data: [
+      {
+        school_name: 'Simon Fraser University',
+        school_location: 'Burnaby mountain',
+      },
+      {
+        school_name: 'Kwantlen Polytechnic University',
+        school_location: '8771 Lansdowne Rd, Richmond, BC V6X 3X7',
+      },
+      {
+        school_name: 'University of British Colombia',
+        school_location: 'Vancouver, BC V6T 1Z4',
+      },
+      {
+        school_name: 'Capilano University',
+        school_location: 'Vancouver, BC V29 XU4',
+      },
+      {
+        school_name: 'Douglas College',
+        school_location: 'Vancouver, BC V6T 1Z4',
+      },
+      {
+        school_name: 'University Canada West',
+        school_location: '626 W Pender St #100, Vancouver, BC V6B 1V9',
+      },
+      {
+        school_name: 'University of Northern British Columbia ',
+        school_location: '3333 University Way, Prince George, BC V2N 4Z9',
+      },
+    ],
   });
 
-  const User1 = await prisma.user.create({
+  const Tyrone = await prisma.user.create({
     data: {
       school: {
         connect: { school_name: 'Simon Fraser University' },
@@ -35,7 +49,7 @@ async function main() {
       phone_number: '604-215-4345',
     },
   });
-  const User2 = await prisma.user.create({
+  const Quinton = await prisma.user.create({
     data: {
       school: {
         connect: { school_name: 'University of British Colombia' },
@@ -48,7 +62,7 @@ async function main() {
     },
   });
 
-  const User3 = await prisma.user.create({
+  const Drake = await prisma.user.create({
     data: {
       school: {
         connect: { school_name: 'Kwantlen Polytechnic University' },
@@ -60,12 +74,111 @@ async function main() {
       phone_number: '778-215-4334',
     },
   });
+  const Quayvon = await prisma.user.create({
+    data: {
+      school: {
+        connect: { school_name: 'Kwantlen Polytechnic University' },
+      },
+      first_name: 'Quayvon',
+      last_name: 'the 2nd',
+      email: 'Quayzymans@hotmail.com',
+      address: '3251 Elmer Street',
+      phone_number: '201-257-4174',
+    },
+  });
 
   const TyroneTheDriver = await prisma.driver.create({
     data: {
-      User: {
-        connect: { id: 1 },
+      driver: {
+        connect: {
+          id: 1,
+        },
       },
+    },
+  });
+
+  const TyronesRide = await prisma.ride.create({
+    data: {
+      driver: {
+        connect: {
+          driver_id: 1,
+        },
+      },
+      date_of_ride: 'Today',
+      number_of_seats: 3,
+      departure_location: 'Las Vegas',
+      school_location: 'somewhere',
+    },
+  });
+
+  const QuintonTheDriver = await prisma.driver.create({
+    data: {
+      driver: {
+        connect: {
+          id: 2,
+        },
+      },
+    },
+  });
+
+  const QuintonsRide = await prisma.ride.create({
+    data: {
+      driver: {
+        connect: {
+          driver_id: 2,
+        },
+      },
+      date_of_ride: 'Tomorrow',
+      number_of_seats: 12,
+      departure_location: 'South America',
+      school_location: 'i forgot',
+    },
+  });
+
+  const DrakeRequestTyrone = await prisma.request.create({
+    data: {
+      requester: {
+        connect: {
+          id: 3,
+        },
+      },
+      requested_ride: {
+        connect: {
+          ride_id: 1,
+        },
+      },
+      requester_location: 'too far man',
+    },
+  });
+
+  const DrakeRequestQuinton = await prisma.request.create({
+    data: {
+      requester: {
+        connect: {
+          id: 3,
+        },
+      },
+      requested_ride: {
+        connect: {
+          ride_id: 2,
+        },
+      },
+      requester_location: 'too far man',
+    },
+  });
+  const QuayvonRequestQuinton = await prisma.request.create({
+    data: {
+      requester: {
+        connect: {
+          id: 4,
+        },
+      },
+      requested_ride: {
+        connect: {
+          ride_id: 2,
+        },
+      },
+      requester_location: 'uhhh',
     },
   });
 
