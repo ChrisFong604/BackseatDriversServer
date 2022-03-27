@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { Prisma, Request } from '@prisma/client';
+import { Prisma, Request, Ride } from '@prisma/client';
 import { CreateRequestDto } from './dto/create-request.dto';
 import { ConnectRequestDto } from './dto/connect-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
@@ -11,7 +11,7 @@ export class RequestsService {
 
   //Parses the defined DTO into a query
   async sendRequest(DTO: CreateRequestDto): Promise<Request> {
-    return this.prisma.request.create({
+    return await this.prisma.request.create({
       data: {
         requester: {
           connect: {
@@ -29,14 +29,40 @@ export class RequestsService {
   }
 
   //updates request status and/or location of passenger
-  async updateRequestStatus(DTO: UpdateRequestDto): Promise<Request> {
-    return this.prisma.request.update({
+  async updateRequestStatus(DTO: UpdateRequestDto): Promise<Ride | void> {
+    await this.prisma.request.update({
       where: {
-        id: DTO.id,
+        request_id: DTO.id,
       },
       data: {
         status: DTO.status,
-        requester_location: DTO.requester_location,
+      },
+    });
+
+    const record = await this.prisma.ride.findUnique({
+      where: {
+        ride_id: DTO.ride_id,
+      },
+    });
+
+    if (record.number_of_seats - 1 == 0) {
+      return await this.prisma.ride.update({
+        where: {
+          ride_id: DTO.ride_id,
+        },
+        data: {
+          number_of_seats: 0,
+          isFull: true,
+        },
+      });
+    }
+
+    return await this.prisma.ride.update({
+      where: {
+        ride_id: DTO.ride_id,
+      },
+      data: {
+        number_of_seats: record.number_of_seats - 1,
       },
     });
   }

@@ -53,7 +53,7 @@ model Driver {
 }
 
 model Request {
-  id Int @id @default(autoincrement())
+  request_id Int @id @default(autoincrement())
 
   requester          User   @relation(fields: [requester_id], references: [id])
   requester_id       Int    @unique

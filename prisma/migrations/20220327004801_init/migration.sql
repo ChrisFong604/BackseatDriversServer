@@ -29,19 +29,20 @@ CREATE TABLE "Driver" (
 
 -- CreateTable
 CREATE TABLE "Request" (
-    "id" SERIAL NOT NULL,
+    "request_id" SERIAL NOT NULL,
     "requester_id" INTEGER NOT NULL,
     "requester_location" TEXT NOT NULL,
     "requested_ride_id" INTEGER NOT NULL,
     "status" BOOLEAN NOT NULL DEFAULT false,
 
-    CONSTRAINT "Request_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Request_pkey" PRIMARY KEY ("request_id")
 );
 
 -- CreateTable
 CREATE TABLE "Ride" (
     "ride_id" SERIAL NOT NULL,
     "driver_id" INTEGER NOT NULL,
+    "isFull" BOOLEAN NOT NULL DEFAULT false,
     "date_of_ride" TEXT NOT NULL,
     "number_of_seats" INTEGER NOT NULL,
     "departure_location" TEXT NOT NULL,
