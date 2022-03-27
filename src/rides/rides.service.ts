@@ -30,15 +30,6 @@ export class RidesService {
     });
   }
 
-  async updateRideCapacity(id: number): Promise<Ride> {
-    return await this.prisma.ride.update({
-      where: {
-        ride_id: id,
-      },
-      data: {},
-    });
-  }
-
   async deleteRide(id: number): Promise<Ride> {
     return await this.prisma.ride.delete({
       where: {

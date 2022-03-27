@@ -4,13 +4,12 @@ import {
   Get,
   HttpCode,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateRequestDto } from './dto/create-request.dto';
 import { Request as RequestModel } from '@prisma/client';
 import { RequestsService } from './requests.service';
-import { ConnectRequestDto } from './dto/connect-request.dto';
 
 @Controller('api/request')
 export class RequestsController {
@@ -23,11 +22,16 @@ export class RequestsController {
   // }
 
   @HttpCode(201)
-  @Post('createrequest')
-  async sendRequest(
-    @Body() createRequestDto: CreateRequestDto,
+  @Post('send')
+  async sendRequest(@Body() requestModel: RequestModel): Promise<RequestModel> {
+    return this.requestService.sendRequest(requestModel);
+  }
+
+  @Patch('update')
+  async updateRequest(
+    @Body() requestModel: RequestModel,
   ): Promise<RequestModel> {
-    return this.requestService.sendRequest(createRequestDto);
+    return this.requestService.updateRequestStatus(requestModel);
   }
 
   // @Put('updaterequest/:id')

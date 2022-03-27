@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { Prisma, Request, Ride } from '@prisma/client';
+import { Prisma, Request as RequestModel, Ride } from '@prisma/client';
 import { CreateRequestDto } from './dto/create-request.dto';
 import { ConnectRequestDto } from './dto/connect-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
@@ -10,60 +10,63 @@ export class RequestsService {
   constructor(private prisma: PrismaService) {}
 
   //Parses the defined DTO into a query
-  async sendRequest(DTO: CreateRequestDto): Promise<Request> {
+  async sendRequest(requestObject: RequestModel): Promise<RequestModel> {
     return await this.prisma.request.create({
       data: {
         requester: {
           connect: {
-            id: DTO.requester_id,
+            id: requestObject.requester_id,
           },
         },
         requested_ride: {
           connect: {
-            ride_id: DTO.ride_id,
+            ride_id: requestObject.requested_ride_id,
           },
         },
-        requester_location: DTO.requester_location,
+        requester_location: requestObject.requester_location,
       },
     });
   }
 
   //updates request status and/or location of passenger
-  async updateRequestStatus(DTO: UpdateRequestDto): Promise<Ride | void> {
-    await this.prisma.request.update({
+  async updateRequestStatus(requestModel: RequestModel): Promise<RequestModel> {
+    const requestObj = await this.prisma.request.update({
       where: {
-        request_id: DTO.id,
+        request_id: requestModel.request_id,
       },
       data: {
-        status: DTO.status,
+        status: requestModel.status,
       },
     });
 
     const record = await this.prisma.ride.findUnique({
       where: {
-        ride_id: DTO.ride_id,
+        ride_id: requestModel.requested_ride_id,
       },
     });
 
     if (record.number_of_seats - 1 == 0) {
-      return await this.prisma.ride.update({
+      await this.prisma.ride.update({
         where: {
-          ride_id: DTO.ride_id,
+          ride_id: requestModel.requested_ride_id,
         },
         data: {
           number_of_seats: 0,
           isFull: true,
         },
       });
+
+      return requestObj;
     }
 
-    return await this.prisma.ride.update({
+    await this.prisma.ride.update({
       where: {
-        ride_id: DTO.ride_id,
+        ride_id: requestModel.requested_ride_id,
       },
       data: {
         number_of_seats: record.number_of_seats - 1,
       },
     });
+    return requestObj;
   }
 }
