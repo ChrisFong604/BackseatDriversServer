@@ -9,6 +9,18 @@ import { UpdateRequestDto } from './dto/update-request.dto';
 export class RequestsService {
   constructor(private prisma: PrismaService) {}
 
+  async getRideRequests(ride_id: number): Promise<RequestModel[]> {
+    return await this.prisma.request.findMany({
+      where: { requested_ride_id: ride_id },
+    });
+  }
+
+  // async getSpecificRequest(ride_id: number): Promise<RequestModel>{
+  //   return await this.prisma.request.findUnique({
+  //     where
+  //   })
+  // }
+
   //Parses the defined DTO into a query
   async createRequest(data: Prisma.RequestCreateInput): Promise<RequestModel> {
     return await this.prisma.request.create({
@@ -40,7 +52,7 @@ export class RequestsService {
         },
         data: {
           number_of_seats: 0,
-          isFull: true,
+          is_full: true,
         },
       });
 

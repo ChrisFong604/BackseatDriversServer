@@ -39,7 +39,7 @@ export class DriversService {
   async createDriver(id: number) {
     return await this.prisma.driver.create({
       data: {
-        user: {
+        driver: {
           connect: {
             id: id,
           },

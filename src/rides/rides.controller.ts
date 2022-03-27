@@ -10,15 +10,25 @@ import {
   Query,
 } from '@nestjs/common';
 import { Request, Ride } from '@prisma/client';
+import { RequestsService } from 'src/requests/requests.service';
 import { RidesService } from './rides.service';
 @Controller('api/rides')
 export class RidesController {
-  constructor(private readonly ridesService: RidesService) {}
+  constructor(
+    private readonly ridesService: RidesService,
+    private readonly requestService: RequestsService,
+  ) {}
 
   @HttpCode(200)
   @Get('all')
   getAllRides() {
     return this.ridesService.getAllRides({});
+  }
+
+  @HttpCode(200)
+  @Get('ride-requests/:id')
+  getRequestsForRide(@Param() id: number) {
+    return this.requestService.getRideRequests(id);
   }
 
   // @Patch('update')
