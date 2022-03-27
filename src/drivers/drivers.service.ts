@@ -45,12 +45,12 @@ export class DriversService {
     });
   }
 
-  async createDriver(id: number) {
+  async createDriver(user_id: number) {
     return await this.prisma.driver.create({
       data: {
         driver: {
           connect: {
-            id: id,
+            id: user_id,
           },
         },
       },
@@ -61,7 +61,7 @@ export class DriversService {
     driver_id: number,
     data: Prisma.RideCreateInput,
   ): Promise<void> {
-    this.ridesService.createRide(data, driver_id);
+    this.ridesService.createRide(driver_id, data);
     return;
   }
 

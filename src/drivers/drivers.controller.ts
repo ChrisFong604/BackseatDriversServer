@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { DriversService } from './drivers.service';
 import { Driver } from '@prisma/client';
-import { CreateDriverDto } from './dto/create-driver.dto';
 import { CreateRideDto } from 'src/rides/dto/create-ride.dto';
 
 @Controller('api/drivers')
@@ -31,12 +30,12 @@ export class DriversController {
   }
 
   @HttpCode(201)
-  @Post(':id')
+  @Post('create/:id')
   createDriver(@Param('id', ParseIntPipe) id: number) {
     return this.driversService.createDriver(id);
   }
 
-  @Post(':id')
+  @Post('create-ride/:id')
   createRideFromDriver(
     @Param('id', ParseIntPipe) id: number,
     createRideDto: CreateRideDto,

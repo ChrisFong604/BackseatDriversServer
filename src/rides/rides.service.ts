@@ -13,20 +13,12 @@ export class RidesService {
     where?: Prisma.RideWhereInput;
     orderBy?: Prisma.RideOrderByWithRelationInput;
   }): Promise<Ride[]> {
-    return this.prisma.ride.findMany();
-  }
-
-  async findUniqueRide(
-    rideWhereUniqueInput: Prisma.RideWhereUniqueInput,
-  ): Promise<Ride | null> {
-    return this.prisma.ride.findUnique({
-      where: rideWhereUniqueInput,
-    });
+    return await this.prisma.ride.findMany();
   }
 
   async createRide(
-    data: Prisma.RideCreateInput,
     driver_id: number,
+    data: Prisma.RideCreateInput,
   ): Promise<Ride> {
     return await this.prisma.ride.create({
       data: {
