@@ -73,9 +73,7 @@ async function main() {
 
   const TyroneRide = await prisma.ride.create({
     data: {
-      Driver: {
-        connect: { driver_id: 1 },
-      },
+      driver_id: 0,
       date_of_ride: '2021-01-05',
       number_of_seats: 4,
       departure_location: 'Birmingham, London',

@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Driver, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
+import { RidesService } from 'src/rides/rides.service';
 
 @Injectable()
 export class DriversService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly ridesService: RidesService,
+  ) {}
 
   async getAllDrivers(params: {
     skip?: number;
@@ -29,5 +33,24 @@ export class DriversService {
     return this.prisma.driver.findUnique({
       where: driverWhereUniqueInput,
     });
+  }
+
+  async createDriver(data: Prisma.DriverCreateInput): Promise<Driver> {
+    return await this.prisma.driver.create({
+      data,
+    });
+  }
+
+  async createRideFromDriver(
+    data: Prisma.RideCreateInput,
+    driver_id: number,
+  ): Promise<void> {
+    this.ridesService.createRide(data, driver_id);
+    return;
+  }
+
+  async deleteRideFromDriverId(driver_id: number) {
+    await this.ridesService.deleteRide(driver_id);
+    await this.prisma.driver.delete({ where: { driver_id } });
   }
 }

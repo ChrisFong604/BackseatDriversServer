@@ -64,7 +64,7 @@ CREATE UNIQUE INDEX "User_phone_number_key" ON "User"("phone_number");
 CREATE UNIQUE INDEX "Driver_user_id_key" ON "Driver"("user_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Request_requester_id_key" ON "Request"("requester_id");
+CREATE UNIQUE INDEX "Request_request_id_key" ON "Request"("request_id");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_school_name_fkey" FOREIGN KEY ("school_name") REFERENCES "School"("school_name") ON DELETE RESTRICT ON UPDATE CASCADE;

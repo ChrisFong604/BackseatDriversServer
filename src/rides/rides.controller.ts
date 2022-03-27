@@ -9,8 +9,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { Ride } from '@prisma/client';
-import { CreateRideDto } from './dto/create-ride.dto';
+import { Request, Ride } from '@prisma/client';
 import { RidesService } from './rides.service';
 @Controller('api/rides')
 export class RidesController {
@@ -31,10 +30,4 @@ export class RidesController {
   async removeRide(@Param() id: number) {
     return this.ridesService.deleteRide(id);
   }
-
-  /* @HttpCode(201)
-  @Post('createride')
-  async createRide(@Body() createRideDto: CreateRideDto): Promise<Ride> {
-    return this.ridesService.createRide(createRideDto);
-  } */
 }

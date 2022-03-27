@@ -10,21 +10,9 @@ export class RequestsService {
   constructor(private prisma: PrismaService) {}
 
   //Parses the defined DTO into a query
-  async sendRequest(requestObject: RequestModel): Promise<RequestModel> {
+  async createRequest(data: Prisma.RequestCreateInput): Promise<RequestModel> {
     return await this.prisma.request.create({
-      data: {
-        requester: {
-          connect: {
-            id: requestObject.requester_id,
-          },
-        },
-        requested_ride: {
-          connect: {
-            ride_id: requestObject.requested_ride_id,
-          },
-        },
-        requester_location: requestObject.requester_location,
-      },
+      data,
     });
   }
 

@@ -8,9 +8,9 @@ import {
   Delete,
   HttpCode,
 } from '@nestjs/common';
-import { SchoolService } from './school.service';
+import { School } from '@prisma/client';
 import { CreateSchoolDto } from './dto/create-school.dto';
-import { UpdateSchoolDto } from './dto/update-school.dto';
+import { SchoolService } from './school.service';
 
 @Controller('api/school')
 export class SchoolController {

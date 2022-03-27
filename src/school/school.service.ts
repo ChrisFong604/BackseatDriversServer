@@ -31,9 +31,9 @@ export class SchoolService {
     });
   }
 
-  update(id: number, updateSchoolDto: UpdateSchoolDto) {
-    return `This action updates a #${id} school`;
-  }
+  // update(id: number, updateSchoolDto: UpdateSchoolDto) {
+  //   return `This action updates a #${id} school`;
+  // }
 
   async removeSchool(id: string) {
     return await this.prisma.school.delete({

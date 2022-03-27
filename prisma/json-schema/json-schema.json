@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "School": {
+      "type": "object",
+      "properties": {
+        "school_name": {
+          "type": "string"
+        },
+        "school_location": {
+          "type": "string"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "school": {
+          "$ref": "#/definitions/School"
+        },
+        "school_name": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "Request": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Request"
+          }
+        },
+        "Driver": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Driver"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Driver": {
+      "type": "object",
+      "properties": {
+        "driver_id": {
+          "type": "integer"
+        },
+        "User": {
+          "$ref": "#/definitions/User"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "Ride": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ride"
+          }
+        }
+      }
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "integer"
+        },
+        "requester": {
+          "$ref": "#/definitions/User"
+        },
+        "requester_id": {
+          "type": "integer"
+        },
+        "requester_location": {
+          "type": "string"
+        },
+        "requested_ride": {
+          "$ref": "#/definitions/Ride"
+        },
+        "requested_ride_id": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "Ride": {
+      "type": "object",
+      "properties": {
+        "ride_id": {
+          "type": "integer"
+        },
+        "passenger_requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Request"
+          }
+        },
+        "Driver": {
+          "$ref": "#/definitions/Driver"
+        },
+        "driver_id": {
+          "type": "integer"
+        },
+        "isFull": {
+          "type": "boolean",
+          "default": false
+        },
+        "date_of_ride": {
+          "type": "string"
+        },
+        "number_of_seats": {
+          "type": "integer"
+        },
+        "departure_location": {
+          "type": "string"
+        },
+        "school_location": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "school": {
+      "$ref": "#/definitions/School"
+    },
+    "user": {
+      "$ref": "#/definitions/User"
+    },
+    "driver": {
+      "$ref": "#/definitions/Driver"
+    },
+    "request": {
+      "$ref": "#/definitions/Request"
+    },
+    "ride": {
+      "$ref": "#/definitions/Ride"
+    }
+  }
+}

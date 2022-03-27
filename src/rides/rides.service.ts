@@ -24,9 +24,22 @@ export class RidesService {
     });
   }
 
-  async createRide(data: Prisma.RideCreateInput): Promise<Ride> {
-    return this.prisma.ride.create({
-      data,
+  async createRide(
+    data: Prisma.RideCreateInput,
+    driver_id: number,
+  ): Promise<Ride> {
+    return await this.prisma.ride.create({
+      data: {
+        Driver: {
+          connect: {
+            driver_id: driver_id,
+          },
+        },
+        date_of_ride: data.date_of_ride,
+        number_of_seats: data.number_of_seats,
+        departure_location: data.departure_location,
+        school_location: data.school_location,
+      },
     });
   }
 

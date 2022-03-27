@@ -8,7 +8,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { Request as RequestModel } from '@prisma/client';
+import { Request } from '@prisma/client';
+import { CreateRequestDto } from './dto/create-request.dto';
 import { RequestsService } from './requests.service';
 
 @Controller('api/request')
@@ -23,14 +24,12 @@ export class RequestsController {
 
   @HttpCode(201)
   @Post('send')
-  async sendRequest(@Body() requestModel: RequestModel): Promise<RequestModel> {
-    return this.requestService.sendRequest(requestModel);
+  async sendRequest(@Body() createRequestDto: CreateRequestDto) {
+    return this.requestService.createRequest(createRequestDto);
   }
 
   @Patch('update')
-  async updateRequest(
-    @Body() requestModel: RequestModel,
-  ): Promise<RequestModel> {
+  async updateRequest(@Body() requestModel: Request): Promise<Request> {
     return this.requestService.updateRequestStatus(requestModel);
   }
 
