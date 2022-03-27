@@ -1,4 +1,12 @@
-import { Controller, Get, HttpCode, Param, Post, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { DriversService } from './drivers.service';
 import { Driver } from '@prisma/client';
 import { CreateDriverDto } from './dto/create-driver.dto';
@@ -16,7 +24,7 @@ export class DriversController {
 
   @HttpCode(200)
   @Get('/:id')
-  async getDriverById(@Param('id') id: number): Promise<Driver> {
+  async getDriverById(@Param('id', ParseIntPipe) id: number): Promise<Driver> {
     return this.driversService.getUniqueDriver({
       driver_id: id,
     });
@@ -24,12 +32,15 @@ export class DriversController {
 
   @HttpCode(201)
   @Post(':id')
-  createDriver(@Param() id: number) {
+  createDriver(@Param('id', ParseIntPipe) id: number) {
     return this.driversService.createDriver(id);
   }
 
   @Post(':id')
-  createRideFromDriver(@Param() id: number, createRideDto: CreateRideDto) {
+  createRideFromDriver(
+    @Param('id', ParseIntPipe) id: number,
+    createRideDto: CreateRideDto,
+  ) {
     return this.driversService.createRideFromDriver(id, createRideDto);
   }
 }

@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -27,8 +28,8 @@ export class RidesController {
 
   @HttpCode(200)
   @Get('ride-requests/:id')
-  getRequestsForRide(@Param() id: number) {
-    return this.requestService.getRideRequests(id);
+  async getRequestsForRide(@Param('id', ParseIntPipe) id: number) {
+    return await this.requestService.getRideRequests(id);
   }
 
   // @Patch('update')

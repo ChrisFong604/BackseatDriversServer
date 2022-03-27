@@ -25,6 +25,15 @@ export class DriversService {
       cursor,
       where,
       orderBy,
+      include: {
+        driver: {
+          select: {
+            first_name: true,
+            last_name: true,
+            school_name: true,
+          },
+        },
+      },
     });
   }
 

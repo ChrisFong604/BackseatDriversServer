@@ -23,7 +23,7 @@ export class SchoolController {
   }
 
   @HttpCode(200)
-  @Get('/all')
+  @Get('all')
   findAll() {
     return this.schoolService.getAllSchools({});
   }

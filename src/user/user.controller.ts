@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpCode,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Prisma, PrismaClient, User } from '@prisma/client';
@@ -21,7 +22,7 @@ export class UserController {
     return this.userService.createUser(createUserDto);
   }
 
-  @Get()
+  @Get('/all')
   getAllUsers() {
     return this.userService.getAllUsers({});
   }
@@ -37,7 +38,7 @@ export class UserController {
   // }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.userService.remove(+id);
   }
 }
